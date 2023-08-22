@@ -1,7 +1,7 @@
 
 const Statistics = () => {
   return (
-    <div className='bg-white px-10 lg:px-40 w-full rounded-3xl shadow-md py-8 flex justify-between'>
+    <div className='bg-[#FCFCFC] px-10 lg:px-40 w-full rounded-3xl shadow-md py-8 flex justify-between'>
       <div className='flex items-center'>
         <img src='/2.png' className='md:h-14 md:w-14 lg:h-16 lg:w-16'></img>
         <div className='ml-2'>

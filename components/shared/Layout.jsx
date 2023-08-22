@@ -6,12 +6,12 @@ function Layout({children}) {
     return(
 
 
-        <div>
+        <div className='bg-[#E8ECF4] min-h-screen '>
 
             <div>
                 <Navbar/>
             </div>
-            <div>
+            <div className='text-black'>
                 {children}
             </div>
         </div>

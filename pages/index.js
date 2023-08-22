@@ -14,7 +14,7 @@ export default function Home() {
     <>
       <div
         style={{ height: '100vh' }}
-        className='bg-[#E8ECF4] px-20 lg:px-[180px] py-20 text-black '
+        className='py-20 px-20 lg:px-[180px] '
       >
         <div className=''>
           <Statistics></Statistics>
