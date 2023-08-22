@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 /* eslint-disable max-len */
 module.exports = {
+  darkMode: "class",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
@@ -8,11 +9,12 @@ module.exports = {
   ],
   theme: {
     transparent: "transparent",
-    current: "currentColor",
+    current: "light",
     extend: {
       colors: {
   bleu1: "#3F4E6B",
   gray1: "#E8ECF4",
+  gray2: "#FCFCFC",
         // light mode
         tremor: {
           brand: {

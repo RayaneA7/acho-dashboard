@@ -1,5 +1,9 @@
 import Statistics from "@/components/Home/Statistics";
 import DonutChart from "@/components/Qsts/Question";
+import Question from "@/components/Qsts/FullQuestion"
+import Question2 from "@/components/Qsts/FullQuestions2"
+// import ScatterChartExample from "@/components/Qsts/FullQuestion3"
+import Question1 from "@/components/Qsts/FullQeuestion1"
 
 export default function Questionnaire() {
   return (
@@ -20,7 +24,13 @@ export default function Questionnaire() {
         <Statistics></Statistics>
       </div>
       <div>
-        <DonutChart/>
+      <Question/>
+    {/* <ScatterChartExample/> */}
+          <Question1/>
+      <Question2/>
+    
+
+        {/* <DonutChart/> */}
       </div>
     </div>
   );
