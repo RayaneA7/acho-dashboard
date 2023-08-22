@@ -1,4 +1,3 @@
-"use client"
 
 import { Card, Title, Text, ScatterChart } from "@tremor/react";
 
@@ -24,10 +23,11 @@ const chartdata = [
   // ...
 ];
 
-export default ScatterChartExample = () => (
+export default function ScatterChartExample() {
+    return(
   <Card>
     <Title>Life expectancy vs. GDP per capita</Title>
-    <Text>As of 2015. Source: Our World in Data </Text>
+    <Text> As of 2015. Source: Our World in Data </Text>
     <ScatterChart
       className="h-80 mt-6 -ml-2"
       yAxisWidth={50}
@@ -43,7 +43,7 @@ export default ScatterChartExample = () => (
         y: (lifeExp) => `${lifeExp} yrs`,
         size: (population) => `${(population / 1000000).toFixed(1)}M people`,
       }}
-      showLegend={false}
+      showLegend={true}
     />
-  </Card>
-);
+  </Card>)
+};

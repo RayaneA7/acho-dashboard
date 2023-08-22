@@ -134,29 +134,6 @@ export default () => {
         </div>
       </Card>
 
-      <Card>
-        <Title>Life expectancy vs. GDP per capita</Title>
-        <Text>As of 2015. Source: Our World in Data </Text>
-        <ScatterChart
-          className="h-80 mt-6 -ml-2"
-          yAxisWidth={50}
-          data={chartdata1}
-          category="Country"
-          x="GDP"
-          y="Life_expectancy"
-          size="Population"
-          showOpacity={true}
-          minYValue={60}
-          valueFormatter={{
-            x: (amount) => `$${(amount / 1000).toFixed(1)}K`,
-            y: (lifeExp) => `${lifeExp} yrs`,
-            size: (population) =>
-              `${(population / 1000000).toFixed(1)}M people`,
-          }}
-          showLegend={false}
-        />
-
-      </Card>
 
       <Card className=" bg-gray1 w-full mb-8">
         <Title>
