@@ -9,7 +9,7 @@ const Pagination=()=>{
       <a href="#" className="font-bold flex items-center justify-center px-2 rounded h-6 leading-tight text-[#3F4E6B] bg-gray-100 border border-[#3F4E6B] hover:bg-[#3F4E6B] hover:text-white">
         <span className="sr-only">Previous</span>
         <svg className="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+          <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
         </svg>
       </a>
     </li>
@@ -32,7 +32,7 @@ const Pagination=()=>{
       <a href="#" className="font-bold flex items-center justify-center px-2 rounded h-6 leading-tight text-[#3F4E6B] bg-gray-100 border border-[#3F4E6B] hover:bg-[#3F4E6B] hover:text-white">
         <span className="sr-only">Next</span>
         <svg className="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+          <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
         </svg>
       </a>
     </li>

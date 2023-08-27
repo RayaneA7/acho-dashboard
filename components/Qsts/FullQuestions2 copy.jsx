@@ -22,7 +22,9 @@ const data = [
 export default function Example({chartdata}) {
   return (
     <Card className="bg-gray2">
-      <Title>Ration variance entre les composantes</Title>
+      <Title> <span className="font-bold">Q3 :</span> A travers les marques
+          suivantes vuelliez nous citer celles que vous connaissez ?</Title>
+      <Text>Comparison between Sales and Profit</Text>
       <BarChart
         className="mt-4 h-80"
         data={chartdata}
