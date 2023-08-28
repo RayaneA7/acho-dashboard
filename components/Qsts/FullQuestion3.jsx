@@ -1,6 +1,4 @@
 import { Card, Title, Text, ScatterChart } from "@tremor/react";
-import { useEffect,useState } from "react";
-import axios from "axios";
 
 export default function ScatterChartExample({ chartdata }) {
 
