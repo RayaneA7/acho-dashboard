@@ -13,6 +13,7 @@ import * as Yup from 'yup'
 import { XIcon } from '@heroicons/react/solid'
 import { Icon } from '@tremor/react'
 import dynamic from 'next/dynamic'
+import ChartTest from '@/components/Qsts/LineChart'
 const DynamicBiplotComponent = dynamic(
   () => import('@/components/Qsts/BiplotComponent'),
   {
@@ -63,6 +64,8 @@ export default function Example () {
     { key: 'variable14', value: 'variable94' },
     { key: 'variable15', value: 'variable15' }
   ])
+  const [selectedvarsTSNE, setselectedVarsTSNE] = useState([])
+  const [dataTsne, setDataTsne] = useState([])
   useEffect(() => {
     const getVars = async () => {
       try {
@@ -166,6 +169,40 @@ export default function Example () {
       // setLoading(data["loadings"])
       // console.log(data);
       setDataLda(data)
+      // setDataLda(data["Presence Condor sur RS"])
+      console.log(data)
+    } catch (error) {
+      console.error('Error fetching data:', error)
+    }
+  }
+
+  const submitTsne = async () => {
+    try {
+      let headersList = {
+        Accept: '*/*',
+        'User-Agent': 'Thunder Client (https://www.thunderclient.com)',
+        accestoken: 'your_access_token',
+        'Content-Type': 'application/json'
+      }
+
+      let bodyContent = JSON.stringify({
+        columns: selectedvarsTSNE,
+      })
+
+      let response = await axios.post(
+        'http://localhost:5000/TSNE',
+        bodyContent,
+        {
+          headers: headersList
+        }
+      )
+
+      let data = response.data
+      // setData(data["pca_result"]);
+      // setVariance(data["explained_variance_ratio"]);
+      // setLoading(data["loadings"])
+      // console.log(data);
+      setDataTsne(data)
       // setDataLda(data["Presence Condor sur RS"])
       console.log(data)
     } catch (error) {
@@ -439,8 +476,9 @@ export default function Example () {
 
             if (shouldRender) {
               return (
-                <Card key={index} className='mt-6'>
+                <Card className='mt-6'>
                   <ScatterLda chartdata={targetData} targetName={target} />
+                  {/* <ChartTest chartdata={targetData}></ChartTest>  */}
                 </Card>
               )
             }
@@ -448,7 +486,79 @@ export default function Example () {
 
           return null
         })}
-        {/* By adding the checks targetData && targetData.length > 0, we ensure that we only proceed with checking the keys and rendering if the targetData array is defined and contains at least one object. This should help prevent the "Cannot read properties of undefined" error you were encountering. */}
+      </Card>
+
+      <Title>TSNE</Title>
+      <Text>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</Text>
+      <Card className='mt-6 '>
+        {/************************************* the input for the TSNE features ********************************************************** */}
+        <div className='max-w-sm mx-auto space-y-6 mb-6 '>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            // onSubmit={onSubmit}
+          >
+            {formik => {
+              return (
+                <Form className=' flex items-end '>
+                  <FormikControl
+                    control='select'
+                    label='Variables à sélectionner pour target'
+                    name='isDonator'
+                    options={vars}
+                    onChange={e => {
+                      setselectedVarsTSNE([...selectedvarsTSNE, e.target.value])
+                      formik.handleChange(e)
+                    }}
+                  />
+                  <Button
+                    onClick={() => {
+                      submitTsne()
+                    }}
+                    className=' ml-2 my-0.5 py-3'
+                  >
+                    Submit{' '}
+                  </Button>
+                  {/* <div className="form-control mt-6 md:mt-12">
+                  <button
+                    className={`btn btn-primary bg-red-500`}
+                    type="submit"
+                    disabled={!formik.isValid}
+                  >
+                    Submit
+                  </button>
+                </div> */}
+                </Form>
+              )
+            }}
+          </Formik>
+        </div>{' '}
+        <Card className='bg-gray2 w-full mb-8'>
+          <ul className='flex flex-wrap gap-4'>
+            {selectedvarsTSNE.map((variable, index) => (
+              <li
+                key={index}
+                className={`font-poppins font-normal text-[16px] leading-[24px] text-white bg-bleu1 rounded-xl w-fit pl-4 pr-2 py-2 mr-2`}
+                onClick={e => {
+                  console.log(e.target.innerText)
+
+                  selectedvarsTSNE(
+                    selectedTargetsLda.filter(item => {
+                      item !== e.target.innerText
+                    })
+                  )
+                }}
+              >
+                {variable} <Icon size='xs' icon={XIcon} color='white' />{' '}
+              </li>
+            ))}
+          </ul>
+        </Card>
+        {/************************************* the end of the second input  ********************************************************** */}
+        <Card className='mt-6'>
+        <ScatterChartExample chartdata={dataTsne} />
+          {/* <ChartTest chartdata={targetData}></ChartTest>  */}
+        </Card>
       </Card>
     </main>
   )

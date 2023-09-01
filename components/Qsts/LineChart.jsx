@@ -1,7 +1,7 @@
 import { Card, Title, Text, ScatterChart } from "@tremor/react";
 import { useEffect } from "react";
 
-export default function ScatterLda({ chartdata,targetName }) {
+export default function ChartTest({ chartdata }) {
 
 
 useEffect(()=>{
@@ -10,7 +10,7 @@ useEffect(()=>{
 
   return (
     <Card>
-      <Title>Plot des deux premieres composantes de *{targetName}* </Title>
+      <Title>Plot des deux premieres composantes de  </Title>
       {
         <ScatterChart
           className="h-80 mt-6 -ml-2"
@@ -24,7 +24,7 @@ useEffect(()=>{
           autoMinXValue={true}
           valueFormatter={{
             x: (amount) => `${(amount / 1000).toFixed(1)}`,
-            y: (lifeExp) => `${lifeExp}`,
+            y: (lifeExp) => `0`,
             size: (population) =>
               `${(population / 1000000).toFixed(1)}`,
           }}
