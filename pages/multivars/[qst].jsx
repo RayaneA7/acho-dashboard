@@ -28,9 +28,9 @@ export default function Example () {
   //   { key: "Requester", value: false },
   // ];
 
-    const initialValues = {
-      isDonator: true
-    }
+  const initialValues = {
+    isDonator: true
+  }
 
   const validationSchema = Yup.object({
     isDonator: Yup.string()

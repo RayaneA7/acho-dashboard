@@ -4,12 +4,17 @@ import Pagination from '../components/Home/Pagination'
 import Search from '../components/Home/Search'
 import Statistics from '../components/Home/Statistics'
 import Table from '../components/Home/Table'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+
+
+
   return (
     <>
       <div
@@ -26,7 +31,7 @@ export default function Home() {
             <Search></Search>
           </div>
 
-          <Table></Table>
+          <Table ></Table>
 
           <div className='mt-10 w-full flex  justify-end'>
             <Pagination></Pagination>

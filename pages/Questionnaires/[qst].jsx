@@ -11,15 +11,24 @@ import {
   Title,
   LineChart,
   Button,
+  Icon,
 } from "@tremor/react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Form, Formik } from "formik";
 import FormikControl from "@/components/formComponents/ControlComponents/FormikControl";
+import { XIcon } from "@heroicons/react/outline";
 
 export default function Questionnaire() {
   const [datacharts, setDatacharts] = useState([]);
   const [selectedChart, setSelectedChart] = useState("donut");
+  const [unires, setUnires] = useState([]);
+  const [multivis, setMultivis] = useState([]);
+  const [vars, setVars] = useState([]);
+
+  const initialValues = {
+    isDonator: true,
+  };
 
   const data = [
     {
@@ -43,14 +52,14 @@ export default function Questionnaire() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const results = await axios.get("http://127.0.0.1:5000/univis", {
+        const results = await axios.get("http://127.0.0.1:5000/vars", {
           headers: {
             "Cache-Control": "no-cache",
             "Access-Control-Allow-Origin": "*",
           },
         });
         console.log(results.data);
-        setDatacharts(results.data);
+        setVars(results.data);
         // console.log(datachart);
       } catch (error) {
         console.log(error);
@@ -59,6 +68,58 @@ export default function Questionnaire() {
 
     getData();
   }, []);
+
+  const submitUnivis = async () => {
+    try {
+      let headersList = {
+        Accept: "*/*",
+        "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+        accestoken: "your_access_token",
+        "Content-Type": "application/json",
+      };
+
+      let bodyContent = JSON.stringify({ column_names: unires });
+
+      let response = await axios.post(
+        "http://localhost:5000/univis",
+        bodyContent,
+        {
+          headers: headersList,
+        }
+      );
+
+      let data = response.data;
+      console.log(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const submitMultivis = async () => {
+    try {
+      let headersList = {
+        Accept: "*/*",
+        "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+        accestoken: "your_access_token",
+        "Content-Type": "application/json",
+      };
+
+      let bodyContent = JSON.stringify({ column_names: multivis });
+
+      let response = await axios.post(
+        "http://localhost:5000/multivis",
+        bodyContent,
+        {
+          headers: headersList,
+        }
+      );
+
+      let data = response.data;
+      console.log(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   return (
     <div className="bg-white py-20 px-20 lg:px-[180px]">
@@ -78,10 +139,115 @@ export default function Questionnaire() {
         <Statistics></Statistics>
       </div>
       <div>
-        <div>
+        <div className="max-w-sm mx-auto space-y-6 mb-6 ">
           <Formik
-          initialValues = {'bar'}
+            initialValues={initialValues}
+
+            // onSubmit={onSubmit}
           >
+            {(formik) => {
+              return (
+                <Form className=" flex items-end ">
+                  <FormikControl
+                    control="select"
+                    label="Variables à reponses uniques "
+                    name="is"
+                    options={vars}
+                    onChange={(e) => {
+                      setUnires([...unires, e.target.value]);
+                      formik.handleChange(e);
+                    }}
+                  />
+                  <Button
+                    onClick={() => {
+                      submitUnivis();
+                    }}
+                    type="submit"
+                    className=" ml-2 my-0.5 py-3"
+                  >
+                    Submit
+                  </Button>
+                </Form>
+              );
+            }}
+          </Formik>
+        </div>
+
+        <Card className="bg-gray2 w-full mb-8">
+          <ul className="flex flex-wrap gap-4">
+            {unires.map((variable, index) => (
+              <li
+                key={index}
+                className={`font-poppins font-normal text-[16px] leading-[24px] text-white bg-bleu1 rounded-xl w-fit pl-4 pr-2 py-2 mr-2`}
+                onClick={(e) => {
+                  console.log(e.target.innerText);
+
+                  setUnires(
+                    multivis.filter((item) => {
+                      item !== e.target.innerText;
+                    })
+                  );
+                }}
+              >
+                {variable} <Icon size="xs" icon={XIcon} color="white" />{" "}
+              </li>
+            ))}
+          </ul>
+        </Card>
+
+        <div className="max-w-sm mx-auto space-y-6 mb-6 ">
+          <Formik initialValues={initialValues}>
+            {(formik) => {
+              return (
+                <Form className=" flex items-end ">
+                  <FormikControl
+                    control="select"
+                    label="Variables à multi reponses "
+                    name="isMultivis"
+                    options={vars}
+                    onChange={(e) => {
+                      setMultivis([...multivis, e.target.value]);
+                      formik.handleChange(e);
+                    }}
+                  />
+                  <Button
+                    onClick={() => {
+                      submitMultivis();
+                    }}
+                    className=" ml-2 my-0.5 py-3"
+                  >
+                    Submit
+                  </Button>
+                </Form>
+              );
+            }}
+          </Formik>
+        </div>
+
+        <Card className="bg-gray2 w-full mb-8">
+          <ul className="flex flex-wrap gap-4">
+            {multivis.map((variable, index) => (
+              <li
+                key={index}
+                className={`font-poppins font-normal text-[16px] leading-[24px] text-white bg-bleu1 rounded-xl w-fit pl-4 pr-2 py-2 mr-2`}
+                onClick={(e) => {
+                  console.log(e.target.innerText);
+
+                  setMultivis(
+                    multivis.filter((item) => {
+                      item !== e.target.innerText;
+                    })
+                  );
+                }}
+              >
+                {variable} <Icon size="xs" icon={XIcon} color="white" />{" "}
+              </li>
+            ))}
+          </ul>
+        </Card>
+
+        <div>
+          <Formik initialValues={"bar"}>
             {(formik) => {
               return (
                 <Form className=" flex items-end ">
@@ -95,7 +261,7 @@ export default function Questionnaire() {
                       { key: "LineChart", value: "line" },
                     ]}
                     onChange={(e) => {
-                      console.log(e.target.value)
+                      console.log(e.target.value);
                       setSelectedChart(e.target.value);
                       //formik.handleChange(e);
                     }}
@@ -121,7 +287,6 @@ export default function Questionnaire() {
                     valueFormatter={(number) =>
                       ` ${Intl.NumberFormat("us").format(number).toString()}`
                     }
-                    
                   />
                 </Card>
               );
