@@ -18,6 +18,7 @@ import axios from "axios";
 import { Form, Formik } from "formik";
 import FormikControl from "@/components/formComponents/ControlComponents/FormikControl";
 import { XIcon } from "@heroicons/react/outline";
+import { useRouter } from "next/router";
 
 export default function Questionnaire() {
   const [datacharts, setDatacharts] = useState([]);
@@ -25,6 +26,8 @@ export default function Questionnaire() {
   const [unires, setUnires] = useState([]);
   const [multivis, setMultivis] = useState([]);
   const [vars, setVars] = useState([]);
+
+  const router = useRouter();
 
   const initialValues = {
     isDonator: true,
@@ -50,14 +53,21 @@ export default function Questionnaire() {
   ];
 
   useEffect(() => {
+    const { qst } = router.query;
+
     const getData = async () => {
       try {
-        const results = await axios.get("http://127.0.0.1:5000/vars", {
-          headers: {
-            "Cache-Control": "no-cache",
-            "Access-Control-Allow-Origin": "*",
-          },
-        });
+        console.log(qst);
+
+        const results = await axios.get(
+          `http://127.0.0.1:5000/vars?file=${qst}`,
+          {
+            headers: {
+              "Cache-Control": "no-cache",
+              "Access-Control-Allow-Origin": "*",
+            },
+          }
+        );
         console.log(results.data);
         setVars(results.data);
         // console.log(datachart);
@@ -89,6 +99,7 @@ export default function Questionnaire() {
       );
 
       let data = response.data;
+      setDatacharts(data);
       console.log(data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -182,11 +193,9 @@ export default function Questionnaire() {
                 onClick={(e) => {
                   console.log(e.target.innerText);
 
-                  setUnires(
-                    multivis.filter((item) => {
-                      item !== e.target.innerText;
-                    })
-                  );
+                  setUnires((prevSelectedVars) =>
+                  prevSelectedVars.filter((item) => item !== variable)
+                );
                 }}
               >
                 {variable} <Icon size="xs" icon={XIcon} color="white" />{" "}
@@ -233,11 +242,9 @@ export default function Questionnaire() {
                 onClick={(e) => {
                   console.log(e.target.innerText);
 
-                  setMultivis(
-                    multivis.filter((item) => {
-                      item !== e.target.innerText;
-                    })
-                  );
+                  setMultivis((prevSelectedVars) =>
+                  prevSelectedVars.filter((item) => item !== variable)
+                );
                 }}
               >
                 {variable} <Icon size="xs" icon={XIcon} color="white" />{" "}
@@ -272,61 +279,55 @@ export default function Questionnaire() {
           </Formik>
 
           {selectedChart === "donut" ? (
-            datacharts.map((datachart) => {
-              return (
-                <Card className="bg-gray2 mt-2" key={Date.now()}>
-                  <Title>Variable : {datachart["column_name"]}</Title>
-                  <DonutChart
-                    variant="pie"
-                    showTooltip={true}
-                    className="mt-4 h-80"
-                    data={datachart["response_counts"]}
-                    index={datachart["column_name"]}
-                    categories={["value"]}
-                    yAxisWidth={60}
-                    valueFormatter={(number) =>
-                      ` ${Intl.NumberFormat("us").format(number).toString()}`
-                    }
-                  />
-                </Card>
-              );
-            })
+            datacharts.map((datachart) => (
+              <Card className="bg-gray2 mt-2" key={Date.now()}>
+                <Title>Variable : {datachart["column_name"]}</Title>
+                <DonutChart
+                  variant="pie"
+                  showTooltip={true}
+                  className="mt-4 h-80"
+                  data={datachart["values"]}
+                  index={datachart["column_name"]}
+                  categories={["value"]}
+                  yAxisWidth={60}
+                  valueFormatter={(number) =>
+                    ` ${Intl.NumberFormat("us").format(number).toString()}`
+                  }
+                />
+              </Card>
+            ))
           ) : selectedChart === "bar" ? (
-            datacharts.map((datachart) => {
-              return (
-                <Card className="bg-gray2 mt-2" key={Date.now()}>
-                  <Title>Variable : {datachart["column_name"]}</Title>
-                  <BarChart
-                    className="mt-4 h-80"
-                    data={datachart["response_counts"]}
-                    index={datachart["column_name"]}
-                    categories={["value"]}
-                    yAxisWidth={60}
-                    valueFormatter={(number) =>
-                      ` ${Intl.NumberFormat("us").format(number).toString()}`
-                    }
-                  />
-                </Card>
-              );
-            })
+            datacharts.map((datachart) => (
+              <Card className="bg-gray2 mt-2" key={Date.now()}>
+                <Title>Variable : {datachart["column_name"]}</Title>
+                <BarChart
+                  className="mt-4 h-80"
+                  data={datachart["values"]}
+                  index={datachart["column_name"]}
+                  categories={["value"]}
+                  yAxisWidth={60}
+                  valueFormatter={(number) =>
+                    ` ${Intl.NumberFormat("us").format(number).toString()}`
+                  }
+                />
+              </Card>
+            ))
           ) : selectedChart === "line" ? (
-            datacharts.map((datachart) => {
-              return (
-                <Card className="bg-gray2 mt-2" key={Date.now()}>
-                  <Title>Variable : {datachart["column_name"]}</Title>
-                  <LineChart
-                    className="mt-4 h-80"
-                    data={datachart["response_counts"]}
-                    index={datachart["column_name"]}
-                    categories={["value"]}
-                    yAxisWidth={60}
-                    valueFormatter={(number) =>
-                      ` ${Intl.NumberFormat("us").format(number).toString()}`
-                    }
-                  />
-                </Card>
-              );
-            })
+            datacharts.map((datachart) => (
+              <Card className="bg-gray2 mt-2" key={Date.now()}>
+                <Title>Variable : {datachart["column_name"]}</Title>
+                <LineChart
+                  className="mt-4 h-80"
+                  data={datachart["values"]}
+                  index={datachart["column_name"]}
+                  categories={["value"]}
+                  yAxisWidth={60}
+                  valueFormatter={(number) =>
+                    ` ${Intl.NumberFormat("us").format(number).toString()}`
+                  }
+                />
+              </Card>
+            ))
           ) : (
             <p>Choisi un type de graph a afficher</p>
           )}
