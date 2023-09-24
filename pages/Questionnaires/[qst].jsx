@@ -194,8 +194,8 @@ export default function Questionnaire() {
                   console.log(e.target.innerText);
 
                   setUnires((prevSelectedVars) =>
-                  prevSelectedVars.filter((item) => item !== variable)
-                );
+                    prevSelectedVars.filter((item) => item !== variable)
+                  );
                 }}
               >
                 {variable} <Icon size="xs" icon={XIcon} color="white" />{" "}
@@ -243,8 +243,8 @@ export default function Questionnaire() {
                   console.log(e.target.innerText);
 
                   setMultivis((prevSelectedVars) =>
-                  prevSelectedVars.filter((item) => item !== variable)
-                );
+                    prevSelectedVars.filter((item) => item !== variable)
+                  );
                 }}
               >
                 {variable} <Icon size="xs" icon={XIcon} color="white" />{" "}
@@ -254,7 +254,7 @@ export default function Questionnaire() {
         </Card>
 
         <div>
-          <Formik initialValues={"bar"}>
+          <Formik initialValues={"donut"}>
             {(formik) => {
               return (
                 <Form className=" flex items-end ">
@@ -263,8 +263,8 @@ export default function Questionnaire() {
                     label="choisi le graph ici"
                     name="Chart"
                     options={[
-                      { key: "barChart", value: "bar" },
                       { key: "DonutChart", value: "donut" },
+                      { key: "barChart", value: "bar" },
                       { key: "LineChart", value: "line" },
                     ]}
                     onChange={(e) => {
@@ -279,8 +279,9 @@ export default function Questionnaire() {
           </Formik>
 
           {selectedChart === "donut" ? (
-            datacharts.map((datachart) => (
-              <Card className="bg-gray2 mt-2" key={Date.now()}>
+            datacharts.map((datachart, index) => (
+              <Card className="bg-gray2 mt-2" key={index}>
+                {console.log(index)}
                 <Title>Variable : {datachart["column_name"]}</Title>
                 <DonutChart
                   variant="pie"
@@ -297,8 +298,8 @@ export default function Questionnaire() {
               </Card>
             ))
           ) : selectedChart === "bar" ? (
-            datacharts.map((datachart) => (
-              <Card className="bg-gray2 mt-2" key={Date.now()}>
+            datacharts.map((datachart, index) => (
+              <Card className="bg-gray2 mt-2" key={index}>
                 <Title>Variable : {datachart["column_name"]}</Title>
                 <BarChart
                   className="mt-4 h-80"
@@ -313,8 +314,9 @@ export default function Questionnaire() {
               </Card>
             ))
           ) : selectedChart === "line" ? (
-            datacharts.map((datachart) => (
-              <Card className="bg-gray2 mt-2" key={Date.now()}>
+            datacharts.map((datachart, index) => (
+              <Card className="bg-gray2 mt-2" key={index}>
+                {" "}
                 <Title>Variable : {datachart["column_name"]}</Title>
                 <LineChart
                   className="mt-4 h-80"
