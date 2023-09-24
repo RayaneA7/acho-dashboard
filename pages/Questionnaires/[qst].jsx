@@ -126,6 +126,8 @@ export default function Questionnaire() {
       );
 
       let data = response.data;
+      setDatacharts(data);
+
       console.log(data);
     } catch (error) {
       console.error("Error fetching data:", error);
