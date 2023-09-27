@@ -15,6 +15,7 @@ import { Icon } from "@tremor/react";
 import dynamic from "next/dynamic";
 import ChartTest from "@/components/Qsts/LineChart";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 const DynamicBiplotComponent = dynamic(
   () => import("@/components/Qsts/BiplotComponent"),
   {

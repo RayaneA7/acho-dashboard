@@ -19,6 +19,7 @@ import { Form, Formik } from "formik";
 import FormikControl from "@/components/formComponents/ControlComponents/FormikControl";
 import { XIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 export default function Questionnaire() {
   const [datacharts, setDatacharts] = useState([]);
@@ -26,6 +27,8 @@ export default function Questionnaire() {
   const [unires, setUnires] = useState([]);
   const [multivis, setMultivis] = useState([]);
   const [vars, setVars] = useState([]);
+  const [univarData,setUnivarData] = useState([])
+  const [multivarData,setMultivarData] = useState([])
 
   const router = useRouter();
 
@@ -79,6 +82,10 @@ export default function Questionnaire() {
     getData();
   }, []);
 
+  useEffect(()=> {
+    setDatacharts([...univarData,...multivarData]);
+  },[univarData,multivarData])
+
   const submitUnivis = async () => {
     try {
       let headersList = {
@@ -99,10 +106,12 @@ export default function Questionnaire() {
       );
 
       let data = response.data;
-      setDatacharts(data);
+      setUnivarData(data)
       console.log(data);
     } catch (error) {
       console.error("Error fetching data:", error);
+      toast.error("veillez selctionner les bonnes variables");
+
     }
   };
 
@@ -126,11 +135,13 @@ export default function Questionnaire() {
       );
 
       let data = response.data;
-      setDatacharts(data);
+      setMultivarData(data)
 
       console.log(data);
     } catch (error) {
       console.error("Error fetching data:", error);
+      toast.error("veillez selctionner les bonnes variables");
+
     }
   };
 
