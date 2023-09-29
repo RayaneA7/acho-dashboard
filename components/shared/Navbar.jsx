@@ -113,7 +113,7 @@ function Navbar() {
             <input
               type="text"
               id="search-navbar"
-              className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-red-500  focus:text-gray-900   "
+              className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg   focus:text-gray-900   "
               placeholder="Search..."
             />
           </div>
@@ -158,3 +158,5 @@ function Navbar() {
 }
 
 export default Navbar;
+
+

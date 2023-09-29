@@ -78,6 +78,7 @@ export default function Example() {
         setVars(results.data);
       } catch (error) {
         console.log(error);
+
       }
     };
 
@@ -133,6 +134,7 @@ export default function Example() {
       console.log(data);
     } catch (error) {
       console.error("Error fetching data:", error);
+      toast.error("veillez selctionner les variables numeriques seulment pour le PCA");
     }
   };
 
@@ -163,6 +165,7 @@ export default function Example() {
       console.log(data);
     } catch (error) {
       console.error("Error fetching data:", error);
+      toast.error("veillez selctionner les bonnes variables pour LDA");
     }
   };
 
@@ -193,6 +196,8 @@ export default function Example() {
       console.log(data);
     } catch (error) {
       console.error("Error fetching data:", error);
+      toast.error("veillez selctionner les variables numeriques seulment pour le TSNE");
+
     }
   };
   return (

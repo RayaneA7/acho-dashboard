@@ -1,6 +1,6 @@
 const Search = () => {
   return (
-    <div className='flex items-center'>
+    <div className='md:flex md:items-center flex-columns ml-4 md:ml-0'>
       <div className='flex items-center bg-[#E8ECF4] border-md px-3 py-1 rounded-md'>
         <svg
           className='w-4 h-4 '
@@ -23,7 +23,7 @@ const Search = () => {
           placeholder='rechercher...'
         />
       </div>
-      <div className="flex items-center bg-[#E8ECF4] border-md px-3 py-1 rounded-md ml-2">
+      <div className="flex items-center bg-[#E8ECF4] border-md px-3 py-1 rounded-md md:ml-2 w-fit md:w-full mt-2 md:mt-0 ">
         <select name='cars' id='cars' className="bg-[#E8ECF4]">
           <option value='volvo'>titre</option>
           <option value='saab'>date</option>
