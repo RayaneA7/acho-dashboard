@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
 
-
+const [search,setSearch]=useState({feature:"titre",value:""})
 
   return (
     <>
@@ -28,10 +28,10 @@ export default function Home() {
         <div className='mt-16 bg-white  px-10 lg:px-20 py-8  rounded-2xl'>
           <div className='w-full flex justify-between mb-4'>
             <h1 className='text-2xl font-bold'>Liste des formulaires</h1>
-            <Search></Search>
+            <Search search={search} setSearch={setSearch}></Search>
           </div>
 
-          <Table ></Table>
+          <Table search={search} setSearch={setSearch}></Table>
 
           <div className='mt-10 w-full flex  justify-end'>
             <Pagination></Pagination>
