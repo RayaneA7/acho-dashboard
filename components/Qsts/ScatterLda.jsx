@@ -22,12 +22,12 @@ useEffect(()=>{
           showOpacity={true}
           autoMinYValue={true}
           autoMinXValue={true}
-          valueFormatter={{
-            x: (amount) => `${(amount / 1000).toFixed(1)}`,
-            y: (lifeExp) => `${lifeExp}`,
-            size: (population) =>
-              `${(population / 1000000).toFixed(1)}`,
-          }}
+          // valueFormatter={{
+          //   x: (amount) => `${(amount / 1000).toFixed(1)}`,
+          //   y: (lifeExp) => `${lifeExp}`,
+          //   size: (population) =>
+          //     `${(population / 1000000).toFixed(1)}`,
+          // }}
           showLegend={false}
         />
       }
