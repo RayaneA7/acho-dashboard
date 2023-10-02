@@ -2,15 +2,18 @@ import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const Table = () => {
+const Table = ({search,setSearch}) => {
   const [data, setData] = useState([]);
-
+  const [filteredData, setFilteredData] = useState([]);
   useEffect(() => {
     const getData = async () => {
       try {
         let results = await axios.get("http://127.0.0.1:5000/filesList");
+        console.log("=============the table data ***************")
         console.log(results);
+        console.log("=============the table data end  ***************")
         setData(results.data);
+        setFilteredData(results.data)
       } catch (error) {
         console.log(error);
       }
@@ -19,6 +22,13 @@ const Table = () => {
     getData();
   }, []);
 
+  useEffect(()=>{
+    console.log(search)
+
+    const filteredResult =data.filter(item => item.data[search.feature].toLowerCase().includes(search.value.toLowerCase()))
+    setFilteredData(filteredResult)
+    console.log(data)
+  },[search])
 
   const download_csv = async (titre,name, type) => {
     try {
@@ -67,7 +77,7 @@ const Table = () => {
                 </thead>
                 <tbody>
                   {console.log(data)}
-                  {data.map((variable, index) => (
+                  {filteredData.map((variable, index) => (
                     
                     <tr
                       className="border-b dark:border-neutral-500"
@@ -229,6 +239,8 @@ const Table = () => {
                       </div>
                     </td>
                   </tr>
+
+                  
 
                   <tr className="border-b dark:border-neutral-500">
                     <td className="whitespace-nowrap px-6 py-4 font-medium">
