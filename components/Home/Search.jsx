@@ -28,13 +28,7 @@ const Search = ({search,setSearch}) => {
           placeholder='rechercher...'
         />
       </div>
-      <div className="flex items-center bg-[#E8ECF4] border-md px-3 py-1 rounded-md md:ml-2 w-fit md:w-full mt-2 md:mt-0 ">
-        <select  onChange={(e)=>setSearch({...search,feature:e.target.value})} name='cars' id='cars' className="bg-[#E8ECF4]">
-          <option value='titre'>titre</option>
-          <option value='date'>date</option>
-          <option value='user'>createur</option>
-        </select>
-      </div>
+      
     </div>
   );
 };
