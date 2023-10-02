@@ -295,7 +295,7 @@ const AddAnnonce = ({ onFinishSubmit }) => {
 											formik.isSubmitting
 										}
 									>
-										Submit
+										Soumettre
 									</button>
 								</div>
 							</Form>

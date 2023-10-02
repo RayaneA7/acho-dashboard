@@ -10,7 +10,7 @@ useEffect(()=>{
 
   return (
     <Card>
-      <Title>Plot des deux premieres composantes de *{targetName}* </Title>
+      <Title>Tracé des deux premières composantes de *{targetName}* </Title>
       {
         <ScatterChart
           className="h-80 mt-6 -ml-2"

@@ -134,7 +134,7 @@ export default function Example() {
       console.log(data);
     } catch (error) {
       console.error("Error fetching data:", error);
-      toast.error("veillez selctionner les variables numeriques seulment pour le PCA");
+      toast.error("Veuillez sélectionner variables numériques pour PCA.");
     }
   };
 
@@ -165,7 +165,7 @@ export default function Example() {
       console.log(data);
     } catch (error) {
       console.error("Error fetching data:", error);
-      toast.error("veillez selctionner les bonnes variables pour LDA");
+      toast.error("Veuillez sélectionner variables catégoriques pour LDA");
     }
   };
 
@@ -196,7 +196,7 @@ export default function Example() {
       console.log(data);
     } catch (error) {
       console.error("Error fetching data:", error);
-      toast.error("veillez selctionner les variables numeriques seulment pour le TSNE");
+      toast.error("Veuillez sélectionner variables numériques pour TSNE");
 
     }
   };
@@ -215,7 +215,7 @@ export default function Example() {
         </div>
       </div>
       <Title>PCA</Title>
-      <Text>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</Text>
+      <Text>PCA réduit dimensionnalité en préservant variance pour simplifier représentation des données.</Text>
 
       {/* Main section */}
       <Card className="mt-6 ">
@@ -244,17 +244,9 @@ export default function Example() {
                     }}
                     className=" ml-2 my-0.5 py-3"
                   >
-                    Submit{" "}
+                    Soumettre
                   </Button>
-                  {/* <div className="form-control mt-6 md:mt-12">
-                  <button
-                    className={`btn btn-primary bg-red-500`}
-                    type="submit"
-                    disabled={!formik.isValid}
-                  >
-                    Submit
-                  </button>
-                </div> */}
+
                 </Form>
               );
             }}
@@ -311,7 +303,7 @@ export default function Example() {
 
       {/* ***************************************LDA********************************************* */}
       <Title>LDA</Title>
-      <Text>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</Text>
+      <Text>LDA optimise la distinction des classes dans la réduction dimensionnelle.</Text>
       <Card className="mt-6 ">
         {/************************************* the input for the lda features ********************************************************** */}
         <div className="max-w-sm mx-auto space-y-6 mb-6 ">
@@ -333,16 +325,7 @@ export default function Example() {
                       formik.handleChange(e);
                     }}
                   />
-                  {/* <Button onClick={()=>{submitPca()}} className=" ml-2 my-0.5 py-3">Submit </Button> */}
-                  {/* <div className="form-control mt-6 md:mt-12">
-                  <button
-                    className={`btn btn-primary bg-red-500`}
-                    type="submit"
-                    disabled={!formik.isValid}
-                  >
-                    Submit
-                  </button>
-                </div> */}
+
                 </Form>
               );
             }}
@@ -396,17 +379,9 @@ export default function Example() {
                     }}
                     className=" ml-2 my-0.5 py-3"
                   >
-                    Submit{" "}
+                    Soumettre
                   </Button>
-                  {/* <div className="form-control mt-6 md:mt-12">
-                  <button
-                    className={`btn btn-primary bg-red-500`}
-                    type="submit"
-                    disabled={!formik.isValid}
-                  >
-                    Submit
-                  </button>
-                </div> */}
+
                 </Form>
               );
             }}
@@ -486,7 +461,7 @@ export default function Example() {
       </Card>
 
       <Title>TSNE</Title>
-      <Text>Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</Text>
+      <Text>t-SNE réduit la dimensionnalité en préservant les similarités locales entre données.</Text>
       <Card className="mt-6 ">
         {/************************************* the input for the TSNE features ********************************************************** */}
         <div className="max-w-sm mx-auto space-y-6 mb-6 ">
@@ -500,7 +475,7 @@ export default function Example() {
                 <Form className=" flex items-end ">
                   <FormikControl
                     control="select"
-                    label="Variables à sélectionner pour target"
+                    label="Variables à sélectionner"
                     name="isDonator"
                     options={vars}
                     onChange={(e) => {
@@ -517,17 +492,9 @@ export default function Example() {
                     }}
                     className=" ml-2 my-0.5 py-3"
                   >
-                    Submit{" "}
+                    Soumettre
                   </Button>
-                  {/* <div className="form-control mt-6 md:mt-12">
-                  <button
-                    className={`btn btn-primary bg-red-500`}
-                    type="submit"
-                    disabled={!formik.isValid}
-                  >
-                    Submit
-                  </button>
-                </div> */}
+
                 </Form>
               );
             }}

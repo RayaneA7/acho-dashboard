@@ -88,7 +88,7 @@ const BiplotComponent = ({ pcaResult, loadings, variableLabels }) => {
   }));
 
   const layout = {
-    title: 'PCA Biplot with Lines',
+    title: 'Biplot PCA ',
     xaxis: { title: 'Principal Component 1' },
     yaxis: { title: 'Principal Component 2' },
     showlegend: false,

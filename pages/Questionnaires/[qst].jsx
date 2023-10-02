@@ -174,7 +174,7 @@ export default function Questionnaire() {
                 <Form className=" flex items-end ">
                   <FormikControl
                     control="select"
-                    label="Variables à reponses uniques "
+                    label="variables à réponses uniques"
                     name="is"
                     options={vars}
                     onChange={(e) => {
@@ -189,7 +189,7 @@ export default function Questionnaire() {
                     type="submit"
                     className=" ml-2 my-0.5 py-3"
                   >
-                    Submit
+                    Soumettre
                   </Button>
                 </Form>
               );
@@ -224,7 +224,7 @@ export default function Questionnaire() {
                 <Form className=" flex items-end ">
                   <FormikControl
                     control="select"
-                    label="Variables à multi reponses "
+                    label="variables à réponses multiples"
                     name="isMultivis"
                     options={vars}
                     onChange={(e) => {
@@ -238,7 +238,7 @@ export default function Questionnaire() {
                     }}
                     className=" ml-2 my-0.5 py-3"
                   >
-                    Submit
+                    Soumettre
                   </Button>
                 </Form>
               );
@@ -273,7 +273,7 @@ export default function Questionnaire() {
                 <Form className=" flex items-end ">
                   <FormikControl
                     control="select"
-                    label="choisi le graph ici"
+                    label="type de Tracé"
                     name="Chart"
                     options={[
                       { key: "DonutChart", value: "donut" },
