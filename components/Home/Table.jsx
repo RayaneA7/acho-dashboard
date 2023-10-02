@@ -2,16 +2,13 @@ import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const Table = ({search,setSearch}) => {
+const Table = ({search,setSearch,searchNav,setSearchNav}) => {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   useEffect(() => {
     const getData = async () => {
       try {
         let results = await axios.get("http://127.0.0.1:5000/filesList");
-        console.log("=============the table data ***************")
-        console.log(results);
-        console.log("=============the table data end  ***************")
         setData(results.data);
         setFilteredData(results.data)
       } catch (error) {
@@ -23,12 +20,14 @@ const Table = ({search,setSearch}) => {
   }, []);
 
   useEffect(()=>{
-    console.log(search)
-
     const filteredResult =data.filter(item => item.data[search.feature].toLowerCase().includes(search.value.toLowerCase()))
     setFilteredData(filteredResult)
-    console.log(data)
   },[search])
+
+  useEffect(()=>{
+    const filteredResult =data.filter(item => item.data.titre.toLowerCase().includes(searchNav.toLowerCase()))
+    setFilteredData(filteredResult)
+  },[searchNav])
 
   const download_csv = async (titre,name, type) => {
     try {

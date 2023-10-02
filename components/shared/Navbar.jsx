@@ -1,7 +1,11 @@
 import Link from "next/link";
+import { useEffect } from "react";
 
 
-function Navbar() {
+function Navbar({searchNav,setSearchNav}) {
+  useEffect(()=>{
+    console.log(searchNav)
+  },[])
   return (
     <nav
       style={{ position: "sticky", top: "0", zIndex: "100" }}
@@ -57,6 +61,7 @@ function Navbar() {
               <span className="sr-only">Search icon</span>
             </div>
             <input
+              onChange={(e)=>{setSearchNav(e.target.value)}}
               type="text"
               id="search-navbar"
               className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -111,6 +116,7 @@ function Navbar() {
               </svg>
             </div>
             <input
+              onChange={(e)=>{setSearchNav(e.target.value)}}
               type="text"
               id="search-navbar"
               className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg   focus:text-gray-900   "

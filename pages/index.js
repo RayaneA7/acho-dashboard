@@ -11,8 +11,11 @@ import axios from 'axios'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export default function Home({searchNav,setSearchNav}) {
 
+  useEffect(()=>{
+  console.log(searchNav)
+  },[])
 const [search,setSearch]=useState({feature:"titre",value:""})
 
   return (
@@ -22,6 +25,7 @@ const [search,setSearch]=useState({feature:"titre",value:""})
         className='py-20 px-20 lg:px-[180px] '
       >
         <div className=''>
+          
           <Statistics></Statistics>
         </div>
 
@@ -31,7 +35,7 @@ const [search,setSearch]=useState({feature:"titre",value:""})
             <Search search={search} setSearch={setSearch}></Search>
           </div>
 
-          <Table search={search} setSearch={setSearch}></Table>
+          <Table searchNav={searchNav} setSearchNav={setSearchNav} search={search} setSearch={setSearch}></Table>
 
           <div className='mt-10 w-full flex  justify-end'>
             <Pagination></Pagination>
