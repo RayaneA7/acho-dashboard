@@ -3,7 +3,6 @@ import { Card, Title, Text, Grid, Button } from '@tremor/react'
 import ScatterChartExample from '@/components/Qsts/FullQuestion3'
 import ScatterLda from '@/components/Qsts/ScatterLda'
 import Question from '@/components/Qsts/FullQuestions2'
-import Question2 from '@/components/Qsts/FullQeuestion1'
 import { MultiSelect, MultiSelectItem } from '@tremor/react'
 import { CalculatorIcon } from '@heroicons/react/outline'
 import { useState, useEffect } from 'react'
@@ -274,15 +273,6 @@ export default function Example () {
             ))}
           </ul>
         </Card>
-        {/* <Card className="bg-gray1 w-full">
-          {list_items.length === 0 ? (
-            <div className="h-28" />
-          ) : (
-            list_items?.map((item, index) => {
-              <div key={index}>item.value</div>;
-            })
-          )}
-        </Card> */}
       </Card>
       <Card className='mt-6'>
         <ScatterChartExample chartdata={data} />
