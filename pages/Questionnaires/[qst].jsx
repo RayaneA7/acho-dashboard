@@ -343,60 +343,6 @@ export default function Questionnaire() {
             <p>Choisi un type de graph a afficher</p>
           )}
         </div>
-        {/* <Question /> */}
-        {/* <ScatterChartExample /> */}
-        {/* <Question1 /> */}
-
-        {/* <Card className="bg-gray2">
-          <Title>Variable : {datachart["column_name"]}</Title>
-          <BarChart
-            className="mt-4 h-80"
-            data={datachart["response_counts"]}
-            index={datachart["column_name"]}
-            categories={["value"]}
-            stack={false}
-            yAxisWidth={60}
-            valueFormatter={(number) =>
-              ` ${Intl.NumberFormat("us").format(number).toString()}`
-            }
-          />
-        </Card> */}
-
-        {/* <Card className="bg-gray2">
-          <Title>Variable : {datachart["column_name"]}</Title>
-          <DonutChart
-            variant="pie"
-            className="mt-4 h-80"
-            data={datachart["response_counts"]}
-            index={datachart["column_name"]}
-            categories={["value"]}
-            // colors={["indigo"]}
-            stack={false}
-            yAxisWidth={60}
-            valueFormatter={(number) =>
-              ` ${Intl.NumberFormat("us").format(number).toString()}`
-            }
-          />
-        </Card>
-
-
-        <Card className="bg-gray2">
-          <Title>Variable : {datachart["column_name"]}</Title>
-          <LineChart
-            className="mt-4 h-80"
-            data={datachart["response_counts"]}
-            index={datachart["column_name"]}
-            categories={["value"]}
-            // colors={["indigo"]}
-            stack={false}
-            yAxisWidth={60}
-            valueFormatter={(number) =>
-              ` ${Intl.NumberFormat("us").format(number).toString()}`
-            }
-          />
-        </Card> */}
-
-        {/* <DonutChart /> */}
       </div>
     </div>
   );
