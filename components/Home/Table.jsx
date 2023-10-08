@@ -123,14 +123,14 @@ const Table = ({search,setSearch,searchNav,setSearchNav}) => {
                       <td className="whitespace-nowrap px-6 py-4">
                         <div className="flex ">
                           <button className=" bg-[#3F4E6B] text-white px-2 rounded py-1 ml-1 lg:ml-3 lg:px-4 hover:shadow-lg">
-                            <Link href={`/Questionnaires/${variable.filename}`}>Univariée</Link>
+                            <Link href={`/Questionnaires/${variable.filename}?message=${variable.data.titre}`}>Univariée</Link>
                           </button>
                         </div>
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
                         <div className="flex ">
                           <button className=" bg-[#3F4E6B] text-white px-2 rounded py-1 ml-1 lg:ml-3 lg:px-4 hover:shadow-lg">
-                            <Link href={`/multivars/${variable.filename}`}>Multivariée</Link>
+                            <Link href={`/multivars/${variable.filename}?message=${variable.data.titre}`}>Multivariée</Link>
                           </button>
                         </div>
                       </td>
