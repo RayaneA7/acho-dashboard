@@ -32,24 +32,7 @@ export default function Questionnaire() {
     isDonator: true,
   };
 
-  const data = [
-    {
-      Month: "Jan 21",
-      Sales: 2890,
-      Profit: 2400,
-    },
-    {
-      Month: "Feb 21",
-      Sales: 1890,
-      Profit: 1398,
-    },
-    // ...
-    {
-      Month: "Jan 22",
-      Sales: 3890,
-      Profit: 2980,
-    },
-  ];
+
 
   useEffect(() => {
     const { qst } = router.query;
@@ -79,9 +62,14 @@ export default function Questionnaire() {
   }, []);
 
   useEffect(()=> {
+
+
     setDatacharts([...univarData,...multivarData]);
   },[univarData,multivarData])
 
+  const { qst } = router.query;
+
+  
   const submitUnivis = async () => {
     try {
       let headersList = {
@@ -91,8 +79,8 @@ export default function Questionnaire() {
         "Content-Type": "application/json",
       };
 
-      let bodyContent = JSON.stringify({ column_names: unires });
-
+      let bodyContent = JSON.stringify({ column_names: unires , original_filename: qst});
+      console.log(qst)
       let response = await axios.post(
         "http://localhost:5000/univis",
         bodyContent,
@@ -119,8 +107,9 @@ export default function Questionnaire() {
         accestoken: "your_access_token",
         "Content-Type": "application/json",
       };
+      console.log(qst)
 
-      let bodyContent = JSON.stringify({ column_names: multivis });
+      let bodyContent = JSON.stringify({ column_names: multivis  , original_filename: qst});
 
       let response = await axios.post(
         "http://localhost:5000/multivis",
