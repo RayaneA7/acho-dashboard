@@ -14,7 +14,7 @@ export default function PcaComponent({chartdata}) {
         stack={false}
         yAxisWidth={60}
         valueFormatter={(number) =>
-          `$ ${Intl.NumberFormat("us").format(number).toString()}`
+          `${number}`
         }
       />
     </Card>

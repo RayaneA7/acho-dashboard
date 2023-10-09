@@ -20,10 +20,8 @@ export default function PcaComponentScatter({ chartdata }) {
           autoMinYValue={true}
           autoMinXValue={true}
           valueFormatter={{
-            x: (amount) => `${(amount / 1000).toFixed(1)}`,
+            x: (amount) => `${amount}`,
             y: (lifeExp) => `${lifeExp}`,
-            size: (population) =>
-              `${(population / 1000000).toFixed(1)}`,
           }}
           showLegend={false}
         />

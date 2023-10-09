@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Card, Title, Text, Grid, Button } from '@tremor/react'
-import ScatterChartExample from '@/components/Qsts/PcaComponentScatter'
+import ScatterChart from '@/components/Qsts/PcaComponentScatter'
 import ScatterLda from '@/components/Qsts/ScatterLda'
 import Question from '@/components/Qsts/PcaComponent'
 import { MultiSelect, MultiSelectItem } from '@tremor/react'
@@ -83,29 +83,7 @@ export default function Example () {
     getVars()
   }, [])
 
-
-
-  const chartdata = [
-    {
-      Country: 'Argentina',
-      Life_expectancy: 76.3,
-      GDP: 13467.1236,
-      Population: 43417765
-    },
-    {
-      Country: 'Australia',
-      Life_expectancy: 82.8,
-      GDP: 56554.3876,
-      Population: 23789338
-    },
-    {
-      Country: 'Austria',
-      Life_expectancy: 81.5,
-      GDP: 43665.947,
-      Population: 8633169
-    }
-    // ...
-  ]
+  const { qst } = router.query
 
   const submitPca = async () => {
     try {
@@ -115,7 +93,7 @@ export default function Example () {
         'Content-Type': 'application/json'
       }
 
-      let bodyContent = JSON.stringify({ columns_for_pca: selectedvars })
+      let bodyContent = JSON.stringify({ columns_for_pca: selectedvars, original_filename: qst  })
 
       let response = await axios.post(
         'http://localhost:5000/PCA',
@@ -146,6 +124,7 @@ export default function Example () {
       let bodyContent = JSON.stringify({
         features: selectedvarsLda,
         target: selectedTargetsLda
+        , original_filename: qst 
       })
 
       let response = await axios.post(
@@ -174,6 +153,7 @@ export default function Example () {
 
       let bodyContent = JSON.stringify({
         columns: selectedvarsTSNE
+        , original_filename: qst 
       })
 
       let response = await axios.post(
@@ -269,7 +249,7 @@ export default function Example () {
         </Card>
       </Card>
       <Card className='mt-6'>
-        <ScatterChartExample chartdata={data} />
+        <ScatterChart chartdata={data} />
       </Card>
 
       {/* KPI section */}
@@ -521,7 +501,7 @@ export default function Example () {
         </Card>
         {/************************************* the end of the second input  ********************************************************** */}
         <Card className='mt-6'>
-          <ScatterChartExample chartdata={dataTsne} />
+          <ScatterChart chartdata={dataTsne} />
           {/* <ChartTest chartdata={targetData}></ChartTest>  */}
         </Card>
       </Card>
