@@ -79,19 +79,19 @@ export default function Questionnaire() {
   }, []);
 
   useEffect(()=> {
+    console.log(univarData)
     setDatacharts([...univarData,...multivarData]);
   },[univarData,multivarData])
 
-  const submitUnivis = async () => {
+  const submitUnivis = async (qst) => {
     try {
+
       let headersList = {
         Accept: "*/*",
-        "User-Agent": "Thunder Client (https://www.thunderclient.com)",
-        accestoken: "your_access_token",
         "Content-Type": "application/json",
       };
 
-      let bodyContent = JSON.stringify({ column_names: unires });
+      let bodyContent = JSON.stringify({ column_names: unires, original_filename: qst });
 
       let response = await axios.post(
         "http://localhost:5000/univis",
@@ -111,16 +111,15 @@ export default function Questionnaire() {
     }
   };
 
-  const submitMultivis = async () => {
+  const submitMultivis = async (qst) => {
+
     try {
       let headersList = {
         Accept: "*/*",
-        "User-Agent": "Thunder Client (https://www.thunderclient.com)",
-        accestoken: "your_access_token",
         "Content-Type": "application/json",
       };
 
-      let bodyContent = JSON.stringify({ column_names: multivis });
+      let bodyContent = JSON.stringify({ column_names: multivis, original_filename: qst});
 
       let response = await axios.post(
         "http://localhost:5000/multivis",
@@ -142,6 +141,7 @@ export default function Questionnaire() {
   };
 
   const message = router.query.message 
+  const { qst } = router.query;
 
   return (
     <div className="bg-white py-20 px-20 lg:px-[180px]">
@@ -183,7 +183,7 @@ export default function Questionnaire() {
                   />
                   <Button
                     onClick={() => {
-                      submitUnivis();
+                      submitUnivis(qst);
                     }}
                     type="submit"
                     className=" ml-2 my-0.5 py-3"
@@ -233,7 +233,7 @@ export default function Questionnaire() {
                   />
                   <Button
                     onClick={() => {
-                      submitMultivis();
+                      submitMultivis(qst);
                     }}
                     className=" ml-2 my-0.5 py-3"
                   >
