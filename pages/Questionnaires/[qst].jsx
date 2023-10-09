@@ -16,6 +16,8 @@ import FormikControl from "@/components/formComponents/ControlComponents/FormikC
 import { XIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
+import MyChart from "@/components/Qsts/Chart";
+
 
 export default function Questionnaire() {
   const [datacharts, setDatacharts] = useState([]);
@@ -25,6 +27,7 @@ export default function Questionnaire() {
   const [vars, setVars] = useState([]);
   const [univarData,setUnivarData] = useState([])
   const [multivarData,setMultivarData] = useState([])
+  const [wordCloudDataMultivis,setWordCloudDataMultivis]=useState([])
 
   const router = useRouter();
 
@@ -120,8 +123,8 @@ export default function Questionnaire() {
       );
 
       let data = response.data;
-      setMultivarData(data)
-
+      setMultivarData(data.result)
+      setWordCloudDataMultivis(data.plot_data)
       console.log(data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -131,7 +134,7 @@ export default function Questionnaire() {
   };
 
   return (
-    <div className="bg-white py-20 px-20 lg:px-[180px]">
+    <div className="bg-white py-20 px-20 lg:px-[180px] w-full">
       <div className="hero bg-opacity-50  min-h-[200px] mb-16">
         {" "}
         <div className="max-w-[1920px] mx-auto flex justify-center pt-16">
@@ -331,6 +334,14 @@ export default function Questionnaire() {
           ) : (
             <p>Choisi un type de graph a afficher</p>
           )}
+          <div className=" flex flex-col items-center justify-center  mx-auto my-4">
+
+          { wordCloudDataMultivis.map((elem)=>(
+           <div >  <MyChart wordCloudDataMultivis={elem} ></MyChart> </div>
+          )
+          )}
+          </div>
+         
         </div>
       </div>
     </div>

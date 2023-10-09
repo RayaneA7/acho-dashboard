@@ -5,14 +5,14 @@
 
 // export default Test
 
-
+import MyChart from "@/components/Qsts/Chart"
 
 
 
 const Test=()=>{
 
     return(
-       <div>hello</div>
+       <div><MyChart/></div>
     )
 }
 
