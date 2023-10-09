@@ -16,6 +16,8 @@ import FormikControl from "@/components/formComponents/ControlComponents/FormikC
 import { XIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
+import MyChart from "@/components/Qsts/Chart";
+
 
 export default function Questionnaire() {
   const [datacharts, setDatacharts] = useState([]);
@@ -25,6 +27,7 @@ export default function Questionnaire() {
   const [vars, setVars] = useState([]);
   const [univarData,setUnivarData] = useState([])
   const [multivarData,setMultivarData] = useState([])
+  const [wordCloudDataMultivis,setWordCloudDataMultivis]=useState([])
 
   const router = useRouter();
 
@@ -32,24 +35,7 @@ export default function Questionnaire() {
     isDonator: true,
   };
 
-  const data = [
-    {
-      Month: "Jan 21",
-      Sales: 2890,
-      Profit: 2400,
-    },
-    {
-      Month: "Feb 21",
-      Sales: 1890,
-      Profit: 1398,
-    },
-    // ...
-    {
-      Month: "Jan 22",
-      Sales: 3890,
-      Profit: 2980,
-    },
-  ];
+
 
   useEffect(() => {
     const { qst } = router.query;
@@ -79,11 +65,14 @@ export default function Questionnaire() {
   }, []);
 
   useEffect(()=> {
-    console.log(univarData)
+
+
     setDatacharts([...univarData,...multivarData]);
   },[univarData,multivarData])
 
-  const submitUnivis = async (qst) => {
+
+  
+  const submitUnivis = async () => {
     try {
 
       let headersList = {
@@ -118,6 +107,7 @@ export default function Questionnaire() {
         Accept: "*/*",
         "Content-Type": "application/json",
       };
+      console.log(qst)
 
       let bodyContent = JSON.stringify({ column_names: multivis, original_filename: qst});
 
@@ -130,8 +120,8 @@ export default function Questionnaire() {
       );
 
       let data = response.data;
-      setMultivarData(data)
-
+      setMultivarData(data.result)
+      setWordCloudDataMultivis(data.plot_data)
       console.log(data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -144,7 +134,7 @@ export default function Questionnaire() {
   const { qst } = router.query;
 
   return (
-    <div className="bg-white py-20 px-20 lg:px-[180px]">
+    <div className="bg-white py-20 px-20 lg:px-[180px] w-full">
       <div className="hero bg-opacity-50  min-h-[200px] mb-16">
         {" "}
         <div className="max-w-[1920px] mx-auto flex justify-center pt-16">
@@ -345,6 +335,14 @@ export default function Questionnaire() {
           ) : (
             <p>Choisi un type de graph a afficher</p>
           )}
+          <div className=" flex flex-col items-center justify-center  mx-auto my-4">
+
+          { wordCloudDataMultivis.map((elem)=>(
+           <div >  <MyChart wordCloudDataMultivis={elem} ></MyChart> </div>
+          )
+          )}
+          </div>
+         
         </div>
       </div>
     </div>

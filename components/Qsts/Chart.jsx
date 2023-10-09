@@ -1,38 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Plot from 'react-plotly.js';
 
-const MyChart = () => {
-    var trace1 = {
-        x: [1, 2, 3, 4, 5],
-        y: [1, 6, 3, 6, 1],
-        mode: 'markers+text',
-        type: 'scatter',
-        name: 'Team A',
-        text: ['A-1', 'A-2', 'A-3', 'A-4', 'A-5'],
-        textposition: 'top center',
-        textfont: {
-          family:  'Raleway, sans-serif'
-        },
-        marker: { size: 12 }
-      };
-      
-      var trace2 = {
-        x: [1.5, 2.5, 3.5, 4.5, 5.5],
-        y: [4, 1, 7, 1, 4],
-        mode: 'markers+text',
-        type: 'scatter',
-        name: 'Team B',
-        text: ['B-a', 'B-b', 'B-c', 'B-d', 'B-e'],
-        textfont : {
-          family:'Times New Roman'
-        },
-        textposition: 'bottom center',
-        marker: { size: 12 }
-      };
-      
-      var data = [ trace1, trace2 ];
-      
+const MyChart = ({wordCloudDataMultivis}) => {
+
+    
       var layout = {
+       
+        autosize: true,
         xaxis: {
           range: [ 0.75, 5.25 ]
         },
@@ -48,13 +22,27 @@ const MyChart = () => {
             color: 'grey',
           }
         },
-        title:'Data Labels on the Plot'
+        title:`Nuages de mots similaires de ${Object.keys(wordCloudDataMultivis)[0]}`
       };
       
+      console.log(wordCloudDataMultivis)
+      console.log(Object.values(wordCloudDataMultivis)[0])
+      console.log(Object.keys(wordCloudDataMultivis)[0])
     //   Plotly.newPlot('myDiv', data, layout);
       
   // Render the Plotly.js chart component
-  return <Plot data={data} layout={layout} />;
+
+  
+  return(
+    <div>
+
+      
+      <div className='w-full'><Plot data={Object.values(wordCloudDataMultivis)[0]} layout={layout} /></div> 
+    
+ 
+  
+    </div>
+  )
 };
 
 export default MyChart;
