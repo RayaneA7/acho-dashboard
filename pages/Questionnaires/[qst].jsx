@@ -66,6 +66,8 @@ export default function Questionnaire() {
 
   useEffect(()=> {
 
+    console.log(univarData)
+    console.log(multivarData)
 
     setDatacharts([...univarData,...multivarData]);
   },[univarData,multivarData])
@@ -91,7 +93,7 @@ export default function Questionnaire() {
       );
 
       let data = response.data;
-      setUnivarData(data)
+      setUnivarData(data.result)
       console.log(data);
     } catch (error) {
       console.error("Error fetching data:", error);
